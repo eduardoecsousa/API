@@ -1,0 +1,43 @@
+version: '3.9'
+services:
+  backend:
+    container_name: app_api
+    build: ./api
+    ports:
+      - 3001:3001
+    working_dir: ./
+    command: dev 
+    volumes: 
+      - ./src:/src
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - APP_PORT=3001
+      - JWT_SECRET=jwt_secret
+      # Conexão com PostgreSQL
+      - DB_USER=postgres
+      - DB_PASS=123456
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=api_db
+    healthcheck:
+      test: ["CMD", "lsof", "-t", "-i:3001"]
+      timeout: 10s
+      retries: 5
+
+  db:
+    image: postgres:15
+    container_name: clinica_db
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=clinica_db
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
