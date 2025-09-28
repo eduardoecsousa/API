@@ -1,4 +1,4 @@
-import { Injectable, Req, Res } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import type { Request, Response } from "express";
 import { IUserRegister } from "../../dtos/IUserRegister";
 import { updateUserUseCase } from "./updateUserUseCasa";
@@ -6,10 +6,7 @@ import { updateUserUseCase } from "./updateUserUseCasa";
 @Injectable()
 class UpdateUserController {
   constructor(private readonly updateUserUseCase: updateUserUseCase) {}
-  async handle(
-    @Req() request: Request,
-    @Res() response: Response,
-  ): Promise<any> {
+  async handle(request: Request, response: Response): Promise<any> {
     const data = request.body as IUserRegister;
     const { id } = request.params;
     try {

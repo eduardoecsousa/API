@@ -3,14 +3,14 @@ import type { Request, Response } from "express";
 import RegisterUserController from "src/modules/user/useCases/createUser/registerUserController";
 import DeleteUserController from "src/modules/user/useCases/deleteUser/deteleUserController";
 import FindAllUserController from "src/modules/user/useCases/ListUser/findAllUserController";
-import FindByIdUserController from "src/modules/user/useCases/ShowUser/findByIdUserController";
 import UpdateUserController from "src/modules/user/useCases/updateUser/updateUserController";
+import ShowUserController from "src/modules/user/useCases/ShowUser/showUserController";
 
 @Controller("users")
 export class UserRoutes {
   constructor(
     private readonly findAllController: FindAllUserController,
-    private readonly findByIdController: FindByIdUserController,
+    private readonly showUserController: ShowUserController,
     private readonly deleteUserController: DeleteUserController,
     private readonly updateUserController: UpdateUserController,
     private readonly registerUserController: RegisterUserController,
@@ -22,7 +22,7 @@ export class UserRoutes {
 
   @Get(":id")
   getUserById(@Req() request: Request, @Res() response: Response) {
-    return this.findByIdController.handle(request, response);
+    return this.showUserController.handle(request, response);
   }
 
   @Post()

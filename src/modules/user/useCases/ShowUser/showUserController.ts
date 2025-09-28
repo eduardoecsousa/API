@@ -1,20 +1,16 @@
-import { Injectable, Req, Res } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import type { Request, Response } from "express";
 import { IUserRegister } from "../../dtos/IUserRegister";
-import { FindByIdUserUseCase } from "./findByIdUserUseCase";
+import { ShowUserUseCase } from "./showUserUseCase";
 
 @Injectable()
-class FindByIdUserController {
-  constructor(private readonly findByIdUserUseCase: FindByIdUserUseCase) {}
-  async handle(
-    @Req() request: Request,
-    @Res() response: Response,
-  ): Promise<any> {
+class ShowUserController {
+  constructor(private readonly showUserUseCase: ShowUserUseCase) {}
+  async handle(request: Request, response: Response): Promise<any> {
     try {
       const { id } = request.params;
 
-      const user: IUserRegister | null =
-        await this.findByIdUserUseCase.execute(id);
+      const user: IUserRegister | null = await this.showUserUseCase.execute(id);
 
       if (!user) {
         return response.status(404).json({ error: "User not found" });
@@ -28,4 +24,4 @@ class FindByIdUserController {
     }
   }
 }
-export default FindByIdUserController;
+export default ShowUserController;

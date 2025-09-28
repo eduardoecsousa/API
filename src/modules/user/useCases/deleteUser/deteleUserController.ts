@@ -2,12 +2,12 @@ import { Injectable, Req, Res } from "@nestjs/common";
 import type { Request, Response } from "express";
 import { IUserRegister } from "../../dtos/IUserRegister";
 import { DeleteUserUseCase } from "./deteleUserUseCase";
-import { FindByIdUserUseCase } from "../ShowUser/findByIdUserUseCase";
+import { ShowUserUseCase } from "../ShowUser/showUserUseCase";
 
 @Injectable()
 class DeleteUserController {
   constructor(
-    private readonly findByIdUserUseCase: FindByIdUserUseCase,
+    private readonly showUserUseCase: ShowUserUseCase,
     private readonly deleteUserUseCase: DeleteUserUseCase,
   ) {}
   async handle(
@@ -17,8 +17,7 @@ class DeleteUserController {
     try {
       const { id } = request.params;
 
-      const user: IUserRegister | null =
-        await this.findByIdUserUseCase.execute(id);
+      const user: IUserRegister | null = await this.showUserUseCase.execute(id);
 
       if (!user) {
         return response.status(404).json({ error: "User not found" });

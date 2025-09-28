@@ -1,4 +1,4 @@
-import { Injectable, Req, Res } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import type { Request, Response } from "express";
 import { IUserRegister } from "../../dtos/IUserRegister";
 import { FindAllUserUseCase } from "./findAllUserUseCase";
@@ -6,10 +6,7 @@ import { FindAllUserUseCase } from "./findAllUserUseCase";
 @Injectable()
 class FindAllUserController {
   constructor(private readonly findAllUserUseCase: FindAllUserUseCase) {}
-  async handle(
-    @Req() request: Request,
-    @Res() response: Response,
-  ): Promise<any> {
+  async handle(request: Request, response: Response): Promise<any> {
     try {
       const AllUsers: IUserRegister[] = await this.findAllUserUseCase.execute();
 
