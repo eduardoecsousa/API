@@ -1,18 +1,29 @@
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { Module } from "@nestjs/common";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { ConfigModule, ConfigService } from "@nestjs/config";
+import { AppController } from "./app.controller";
+import { AppService } from "./app.service";
+import { UserModule } from "./modules/user/User.module";
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432, // porta padrão do PostgreSQL
-      username: 'postgres', // seu usuário
-      password: '123456', // sua senha
-      database: 'test', // seu banco
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true, // ⚠️ cuidado em produção (pode apagar/alterar tabelas)
+    ConfigModule.forRoot({ isGlobal: true }), // lê o .env
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule, UserModule],
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => ({
+        type: "postgres",
+        host: config.get("DB_HOST"),
+        port: +(config.get<string>("DB_PORT") ?? 5432),
+        username: config.get("DB_USERNAME"),
+        password: config.get("DB_PASSWORD"),
+        database: config.get("DB_DATABASE"),
+        entities: [__dirname + "/**/*.entity{.ts,.js}"],
+        synchronize: true,
+      }),
     }),
   ],
+  controllers: [AppController], // precisa do controller pra ter rota
+  providers: [AppService],
 })
 export class AppModule {}

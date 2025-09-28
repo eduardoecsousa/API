@@ -1,11 +1,10 @@
 FROM node:20-alpine
 
-# Update Alpine packages to patch vulnerabilities
 RUN apk update && apk upgrade --no-cache
 
-WORKDIR /api
+WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
 EXPOSE 3001
-ENTRYPOINT ["npm", "run", "dev"]
+CMD ["npm", "run", "start:dev"]

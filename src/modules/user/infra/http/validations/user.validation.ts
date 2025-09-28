@@ -1,4 +1,4 @@
-import { Joi, Segments, celebrate } from 'celebrate';
+import { Joi, Segments, celebrate } from "celebrate";
 
 const validateUserCreate = celebrate({
   [Segments.BODY]: Joi.object().keys({
