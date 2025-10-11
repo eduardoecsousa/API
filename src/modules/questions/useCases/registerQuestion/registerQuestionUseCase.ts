@@ -5,7 +5,7 @@ import { Repository } from "typeorm";
 import IQuestionRegister from "../../dtos/IQuestionRegister";
 
 @Injectable()
-export default class RegisteQuestionUseCase {
+export default class RegisterQuestionUseCase {
   constructor(
     @InjectRepository(Questions)
     private readonly questionRepository: Repository<Questions>,

@@ -3,7 +3,7 @@ import DeleteAnswereUseCase from "./deleteAnswereUseCase";
 import { Request, Response } from "express";
 
 @Injectable()
-export default class deleteAnswereService {
+export default class DeleteAnswereService {
   constructor(private readonly deleteAnswereUseCase: DeleteAnswereUseCase) {}
   async handle(req: Request, res: Response): Promise<any> {
     const { id } = req.params;

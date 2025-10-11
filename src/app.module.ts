@@ -4,12 +4,14 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { UserModule } from "./modules/user/User.module";
+import { QuestionModule } from "./modules/questions/question.module";
+import AnswersModule from "./modules/answers/answers.module";
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }), // lê o .env
     TypeOrmModule.forRootAsync({
-      imports: [ConfigModule, UserModule],
+      imports: [ConfigModule, UserModule, QuestionModule, AnswersModule],
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
         type: "postgres",

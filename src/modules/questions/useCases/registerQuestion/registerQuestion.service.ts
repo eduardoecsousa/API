@@ -1,12 +1,12 @@
 import { Injectable } from "@nestjs/common";
-import RegisteQuestionUseCase from "./registerQuestionUseCase";
+import RegisterQuestionUseCase from "./registerQuestionUseCase";
 import { Request, Response } from "express";
 import IQuestionRegister from "../../dtos/IQuestionRegister";
 
 @Injectable()
 export default class RegisterQuestionService {
   constructor(
-    private readonly registerQuestionUseCase: RegisteQuestionUseCase,
+    private readonly registerQuestionUseCase: RegisterQuestionUseCase,
   ) {}
 
   async handle(req: Request, res: Response): Promise<any> {

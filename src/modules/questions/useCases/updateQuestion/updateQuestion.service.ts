@@ -4,7 +4,7 @@ import UpdateQuestionUseCase from "./updateQuestionUseCase";
 import IQuestionRegister from "../../dtos/IQuestionRegister";
 
 @Injectable()
-export default class updateQuestionService {
+export default class UpdateQuestionService {
   constructor(private readonly updateQuestionUseCase: UpdateQuestionUseCase) {}
   async handle(req: Request, res: Response) {
     const { id } = req.params;
