@@ -7,7 +7,7 @@ export class Questions {
   id: string;
 
   @Column()
-  question: string;
+  title: string;
 
   @OneToMany(() => Answers, (answer) => answer.question)
   answers: Answers[];

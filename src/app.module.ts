@@ -6,12 +6,19 @@ import { AppService } from "./app.service";
 import { UserModule } from "./modules/user/User.module";
 import { QuestionModule } from "./modules/questions/question.module";
 import AnswersModule from "./modules/answers/answers.module";
+import { SeedModule } from "./modules/seed/seed.module";
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }), // lê o .env
     TypeOrmModule.forRootAsync({
-      imports: [ConfigModule, UserModule, QuestionModule, AnswersModule],
+      imports: [
+        ConfigModule,
+        UserModule,
+        QuestionModule,
+        AnswersModule,
+        SeedModule,
+      ],
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
         type: "postgres",
