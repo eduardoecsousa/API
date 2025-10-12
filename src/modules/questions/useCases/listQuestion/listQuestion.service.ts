@@ -1,10 +1,10 @@
 import { Injectable } from "@nestjs/common";
 import { Request, Response } from "express";
-import ListAnswersUseCase from "src/modules/answers/useCase/listAnswers/listAnswersUseCase";
+import ListQuestionUseCase from "./listQuestionUseCase";
 
 @Injectable()
 export default class ListQuestionService {
-  constructor(private readonly listQuestionUseCase: ListAnswersUseCase) {}
+  constructor(private readonly listQuestionUseCase: ListQuestionUseCase) {}
   async handle(req: Request, res: Response) {
     try {
       const allQuestions = await this.listQuestionUseCase.execute();

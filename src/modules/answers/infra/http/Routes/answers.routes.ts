@@ -6,7 +6,7 @@ import RegisterAnswersService from "src/modules/answers/useCase/registerAnswers/
 import ShowAnswereService from "src/modules/answers/useCase/showAnswers/showAnswere.service";
 import UpdateAnswereService from "src/modules/answers/useCase/updateAnswers/updateAnswere.service";
 
-@Controller()
+@Controller("answers")
 export default class AnswersRouter {
   constructor(
     private readonly registerAnswersService: RegisterAnswersService,
@@ -30,12 +30,12 @@ export default class AnswersRouter {
     return this.registerAnswersService.handle(req, res);
   }
 
-  @Put()
+  @Put(":id")
   update(@Req() req: Request, @Res() res: Response) {
     return this.updateAnswereService.handle(req, res);
   }
 
-  @Delete()
+  @Delete(":id")
   delete(@Req() req: Request, @Res() res: Response) {
     return this.deleteAnswereService.handle(req, res);
   }

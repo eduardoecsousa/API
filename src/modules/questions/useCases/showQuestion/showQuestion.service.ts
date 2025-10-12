@@ -1,10 +1,10 @@
 import { Injectable } from "@nestjs/common";
 import { Request, Response } from "express";
-import ShowAnswereUseCase from "src/modules/answers/useCase/showAnswers/showAnswersUseCase";
+import ShowQuestionUseCase from "./showQuestionUseCase";
 
 @Injectable()
 export default class ShowQuestionService {
-  constructor(private readonly showQuestionUseCase: ShowAnswereUseCase) {}
+  constructor(private readonly showQuestionUseCase: ShowQuestionUseCase) {}
   async handle(req: Request, res: Response) {
     const { id } = req.params;
     try {

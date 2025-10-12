@@ -9,7 +9,7 @@ export default class DeleteAnswereService {
     const { id } = req.params;
     try {
       await this.deleteAnswereUseCase.execute(id);
-      return res.status(204).send;
+      return res.status(200).send;
     } catch (error: unknown) {
       const errorMessage =
         error instanceof Error ? error.message : "Unknown error";

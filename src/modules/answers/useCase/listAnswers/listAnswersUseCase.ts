@@ -11,6 +11,8 @@ export default class ListAnswersUseCase {
   ) {}
 
   execute(): Promise<Answers[]> {
-    return this.answersRepository.find();
+    return this.answersRepository.find({
+      relations: ["question"],
+    });
   }
 }

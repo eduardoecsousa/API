@@ -9,6 +9,6 @@ export class Answers {
   @Column()
   answer: string;
 
-  @ManyToOne(() => Questions, (question) => question.answers)
+  @ManyToOne(() => Questions, (question) => question.answers, { eager: true })
   question: Questions;
 }

@@ -12,6 +12,7 @@ export default class ShowAnswereUseCase {
 
   async execute(idUser: string): Promise<Answers | null> {
     const answer = await this.answereRepository.findOne({
+      relations: ["question"],
       where: { id: idUser },
     });
 

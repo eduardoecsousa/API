@@ -11,7 +11,10 @@ export class RegisterAnswersUseCase {
     private readonly answersRepository: Repository<Answers>,
   ) {}
   execute(data: Partial<IAnswersRegister>): Promise<Answers> {
-    const answer = this.answersRepository.create(data);
+    const answer = this.answersRepository.create({
+      answer: data.answer,
+      question: { id: data.question_id },
+    });
     return this.answersRepository.save(answer);
   }
 }
