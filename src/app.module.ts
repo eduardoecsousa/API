@@ -8,6 +8,8 @@ import { QuestionModule } from "./modules/questions/question.module";
 import AnswersModule from "./modules/answers/answers.module";
 import { SeedModule } from "./modules/seed/seed.module";
 import { UserResponseModule } from "./modules/userResponse/UserResponse.module";
+import { AuthModule } from "./modules/login/useCase/auth/auth.module";
+import { LoginModule } from "./modules/login/login.module";
 
 @Module({
   imports: [
@@ -20,6 +22,8 @@ import { UserResponseModule } from "./modules/userResponse/UserResponse.module";
         AnswersModule,
         SeedModule,
         UserResponseModule,
+        AuthModule,
+        LoginModule,
       ],
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
